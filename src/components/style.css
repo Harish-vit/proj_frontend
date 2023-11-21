@@ -1,0 +1,12 @@
+/*body {
+    background: url('./image.jpg') center/cover fixed no-repeat;
+   
+  }*/
+
+  .Header,Footer{
+    position: fixed;
+  }
+  .hedlink{
+    color: white;
+    text-decoration: none;
+  }
