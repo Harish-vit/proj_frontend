@@ -1,0 +1,48 @@
+
+.container {
+  margin-top: 25px;
+}
+
+label {
+  display: block;
+  size: 20px;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 5px;
+  margin-bottom: 10px;
+  margin:2px black solid;
+  border-radius: 6px;
+}
+
+button {
+  margin-bottom: 10px;
+  margin-left: 2px;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color:rgba(72, 209, 255, 0.84);
+}
+
+.add-genre-button {
+  background-color: rgb(184, 255, 193);
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.genre-dropdown {
+  margin: 10px;
+  border-radius:6px ;
+  padding: 5px;
+}
+
+.add-button {
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}

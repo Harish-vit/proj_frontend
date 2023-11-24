@@ -1,14 +1,20 @@
-import './style.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ isLoggedIn }) => {
   return (
     <div className="header">
       <nav>
         <ul>
-          <li ><Link to="/news" className='hedlink'>Home</Link ></li>
-          <li><Link to="/genres" className='hedlink'>Genres</Link></li>
+          <li>
+            <Link to="/All" className='hedlink'>Home</Link>
+          </li>
+          {isLoggedIn && (
+            <>
+              <li><Link to="/news" className='hedlink'>My Feed</Link></li>
+              <li><Link to="/profile" className='hedlink'>Profile</Link></li>
+            </>
+          )}
         </ul>
       </nav>
     </div>

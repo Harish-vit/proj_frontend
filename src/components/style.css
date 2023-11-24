@@ -1,12 +1,24 @@
-/*body {
-    background: url('./image.jpg') center/cover fixed no-repeat;
-   
-  }*/
 
-  .Header,Footer{
-    position: fixed;
-  }
-  .hedlink{
-    color: white;
-    text-decoration: none;
-  }
+.footer {
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa; 
+  padding: 10px;
+  text-align: center;
+  font-size: 14px; 
+}
+
+.footer a {
+  margin-right: 10px;
+  color: #343a40;
+  text-decoration: none;
+}
+
+.brand-name {
+  font-weight: bold;
+  color: #343a40;
+}
+.hedlink{
+  color: white;
+  text-decoration: none;
+}

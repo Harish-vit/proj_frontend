@@ -1,19 +1,32 @@
-// Import necessary components and libraries
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 import { useState } from 'react';
 import './App.css';
 import Login from './components/login/Log';
 import Register from './components/register/Reg';
-import GenreGrid from './components/Genregrid';
+import GenreGrid from './components/register/Genregrid';
 import NewsPage from './components/Newspage';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import All from './components/All';
+import Profile from './components/Profile'; 
 
-// Define the main App component
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback({ error, resetErrorBoundary }) {
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  );
+}
+
 function App() {
   const [user, setLoginUser] = useState({});
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [selectedGenres, setSelectedGenres] = useState([]);
-  const [progress, setProgress] = useState(0);  // Add this line
+  const [progress, setProgress] = useState(0);
 
   const handleGenreToggle = (genre) => {
     setSelectedGenres((prevGenres) => {
@@ -28,25 +41,28 @@ function App() {
   return (
     <div className="body">
       <Router>
-        <Header/>
+        <Header isLoggedIn={isLoggedIn}/>
+        <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => setProgress(0)}>
         <Routes>
           <Route
             path="/"
-            element={user && user._id ? (
-              <Navigate to="/genres" />
-            ) : (
+            element={
               <div className="blur-container">
                 <Navigate to="/Login" />
               </div>
-            )}
+            }
           />
           <Route
             path="/Login"
             element={
               <div className="blur-container">
-                <Login setLoginUser={setLoginUser} />
+                <Login setIsLoggedIn={setIsLoggedIn} setLoginUser={setLoginUser} />
               </div>
             }
+          />
+          <Route
+              path="/All" 
+              element={<All setProgress={setProgress}/>}
           />
           <Route
             path="/Register"
@@ -58,19 +74,19 @@ function App() {
           />
           <Route
             path="/news"
-            element={<NewsPage selectedGenres={selectedGenres} setProgress={setProgress} />}
+            element={<NewsPage user={user} setProgress={setProgress} />}
           />
-          {/* Add a default route to redirect to /Login */}
           <Route
-            index
-            element={<Navigate to="/Login" />}
+            path="/profile" 
+            element={<Profile user={user} setLoginUser={setLoginUser} />}
           />
+
         </Routes>
-        <Footer/>
+        </ErrorBoundary>
+        <Footer />
       </Router>
     </div>
   );
 }
 
-// Export the App component
 export default App;

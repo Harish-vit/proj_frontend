@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './style.css'; // Import specific CSS file for Login component
+import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setLoginUser }) => {
+const Login = ({ setLoginUser, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
@@ -18,18 +18,19 @@ const Login = ({ setLoginUser }) => {
     });
   };
 
-  const login = () => {
-    axios.post('https://news-users-pjt.onrender.com/user/loginn', user)
-      .then((res) => {
-        alert(res.data.message);
-        setLoginUser(res.data.user);
-        navigate('/genres');
-      })
-      .catch((error) => {
-        console.error('Login failed:', error.message);
-        setLoginUser({});
-      });
+  const login = async () => {
+    try {
+      const response = await axios.post('http://localhost:4000/user/login', user);
+      alert(response.data.message);
+      setLoginUser(response.data.user);
+      setIsLoggedIn(true);
+      navigate('/All');
+    } catch (error) {
+      console.error('Login failed:', error.message);
+      setLoginUser({});
+    }
   };
+  
 
   return (
     <div className="login-body">
@@ -50,6 +51,7 @@ const Login = ({ setLoginUser }) => {
                     value={user.email}
                     onChange={handleChange}
                     placeholder="Your email"
+                    autoComplete='username'
                   />
                 </div>
               </div>
@@ -63,6 +65,7 @@ const Login = ({ setLoginUser }) => {
                     value={user.password}
                     onChange={handleChange}
                     placeholder="Your password"
+                    autoComplete='current-password'
                   />
                 </div>
               </div>

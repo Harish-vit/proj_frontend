@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './style.css'; // Make sure to import the correct CSS file
+import GenreGrid from './Genregrid';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -9,6 +9,7 @@ const Register = () => {
     name: '',
     email: '',
     password: '',
+    selectedGenres: [],
   });
 
   const handleChange = (e) => {
@@ -19,13 +20,28 @@ const Register = () => {
     });
   };
 
+  const handleGenreToggle = (genre) => {
+    setUser((prevUser) => ({
+      ...prevUser,
+      selectedGenres: prevUser.selectedGenres.includes(genre)
+        ? prevUser.selectedGenres.filter((g) => g !== genre)
+        : [...prevUser.selectedGenres, genre],
+    }));
+  };
+
   const register = async () => {
-    const { name, email, password } = user;
-    if (name && email && password) {
+    const { name, email, password, selectedGenres } = user;
+    if (name && email && password && selectedGenres.length > 0) {
       try {
-        const response = await axios.post('https://news-users-pjt.onrender.com/user/register', user);
+        const userData = {
+          name,
+          email,
+          password,
+          selectedGenres,
+        };
+        const response = await axios.post('http://localhost:4000/user/register', userData);
         console.log(response);
-        navigate('/Login');
+        navigate('/All');
       } catch (error) {
         console.error('Error during registration:', error);
       }
@@ -78,6 +94,12 @@ const Register = () => {
                   placeholder="Password"
                 />
               </div>
+            </div>
+            <div className="login-form-group">
+              <GenreGrid
+                selectedGenres={user.selectedGenres}
+                onGenreToggle={handleGenreToggle}
+              />
             </div>
             <div className="button-container">
               <button
