@@ -39,7 +39,7 @@ const Register = () => {
           password,
           selectedGenres,
         };
-        const response = await axios.post('http://localhost:4000/user/register', userData);
+        const response = await axios.post('https://proj-backend-evsx.onrender.com/user/register', userData);
         console.log(response);
         navigate('/All');
       } catch (error) {

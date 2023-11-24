@@ -20,7 +20,7 @@ const Login = ({ setLoginUser, setIsLoggedIn }) => {
 
   const login = async () => {
     try {
-      const response = await axios.post('http://localhost:4000/user/login', user);
+      const response = await axios.post('https://proj-backend-evsx.onrender.com/user/login', user);
       alert(response.data.message);
       setLoginUser(response.data.user);
       setIsLoggedIn(true);
