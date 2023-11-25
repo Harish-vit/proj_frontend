@@ -23,7 +23,7 @@ const Profile = ({ user, setLoginUser }) => {
 
   const handleEditName = async () => {
     try {
-      const response = await axios.put(`https://proj-backend-evsx.onrender.com/user/editname`, { email: user.email, name });
+      const response = await axios.put(`https://newsapp-be.onrender.com/user/editname`, { email: user.email, name });
       console.log(response);
       setLoginUser({ ...user, name });
       setError(null);
@@ -35,7 +35,7 @@ const Profile = ({ user, setLoginUser }) => {
 
   const handleEditPassword = async () => {
     try {
-      const response = await axios.put(`https://proj-backend-evsx.onrender.com/user/editpassword`, { email: user.email, password });
+      const response = await axios.put(`https://newsapp-be.onrender.com/user/editpassword`, { email: user.email, password });
       console.log(response);
       setLoginUser({ ...user, password });
       setError(null);
@@ -47,7 +47,7 @@ const Profile = ({ user, setLoginUser }) => {
 
   const handleAddSelectedGenre = async () => {
     try {
-      const response = await axios.put(`https://proj-backend-evsx.onrender.com/user/addgenre`, { email: user.email, genre: selectedGenre });
+      const response = await axios.put(`https://newsapp-be.onrender.com/user/addgenre`, { email: user.email, genre: selectedGenre });
       console.log(response);
       setLoginUser({ ...user, selectedGenres: [...selectedGenres, selectedGenre] });
       setError(null);
@@ -60,7 +60,7 @@ const Profile = ({ user, setLoginUser }) => {
 
   const handleDeleteGenre = async (genre) => {
     try {
-      const response = await axios.put(`https://proj-backend-evsx.onrender.com/user/deletegenre`, { email: user.email, genre });
+      const response = await axios.put(`https://newsapp-be.onrender.com/user/deletegenre`, { email: user.email, genre });
       console.log(response);
       setLoginUser({ ...user, selectedGenres: selectedGenres.filter(g => g !== genre) });
       setError(null);
