@@ -12,8 +12,7 @@ const All = ({ setProgress }) => {
   const updateNews = async () => {
     try {
       setProgress(10);
-      const proxyUrl = "https://cors-anywhere.herokuapp.com/"
-      const url = `${proxyUrl}https://newsapi.org/v2/top-headlines?country=in&everything&apiKey=5c46782116ca42c4a8043dc3d6247a59&pageSize=50`;
+      const url = `https://newsapi.org/v2/top-headlines?country=in&everything&apiKey=5c46782116ca42c4a8043dc3d6247a59&pageSize=50`;
       const response = await axios.get(url);
       const parsedData = response.data;
       setArticles(parsedData.articles);
